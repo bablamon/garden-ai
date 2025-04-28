@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Explore Medicinal Plants</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <audio id="hoverSound" src="sounds/hover.mp3" preload="auto"></audio>
+
+  <header class="hero">
+    <h1 class="animate__animated animate__fadeInDown">Explore Medicinal Plants</h1>
+    <p class="animate__animated animate__fadeIn animate__delay-1s">Discover the healing power of Ayurvedic herbs</p>
+    <div class="sound-control">
+      <i class="fas fa-volume-up" id="soundIcon"></i>
+      <span>Sound On</span>
+    </div>
+  </header>
+
+  <section class="plant-gallery">
+    <!-- Tulsi -->
+    <div class="plant-card slide" style="--i:0;" data-plant="tulsi">
+      <div class="card-inner">
+        <img src="images/tulsi.jpg" alt="Tulsi plant" loading="lazy">
+        <h3 class="plant-name">Tulsi</h3>
+        <div class="plant-info-popup">
+          <h3>Tulsi</h3>
+          <p><em>Ocimum sanctum</em></p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ashwagandha -->
+    <div class="plant-card slide" style="--i:1;" data-plant="ashwagandha">
+      <div class="card-inner">
+        <img src="images/ashwagandha.jpg" alt="Ashwagandha plant" loading="lazy">
+        <h3 class="plant-name">Ashwagandha</h3>
+        <div class="plant-info-popup">
+          <h3>Ashwagandha</h3>
+          <p><em>Withania somnifera</em></p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Neem -->
+    <div class="plant-card slide" style="--i:2;" data-plant="neem">
+      <div class="card-inner">
+        <img src="images/neem.jpg" alt="Neem plant" loading="lazy">
+        <h3 class="plant-name">Neem</h3>
+        <div class="plant-info-popup">
+          <h3>Neem</h3>
+          <p><em>Azadirachta indica</em></p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amalaki -->
+    <div class="plant-card slide" style="--i:3;" data-plant="amalaki">
+      <div class="card-inner">
+        <img src="images/amalaki.jpg" alt="Amalaki plant" loading="lazy">
+        <h3 class="plant-name">Amalaki</h3>
+        <div class="plant-info-popup">
+          <h3>Amalaki (Amla)</h3>
+          <p><em>Phyllanthus emblica</em></p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Haritaki -->
+    <div class="plant-card slide" style="--i:4;" data-plant="haritaki">
+      <div class="card-inner">
+        <img src="images/haritaki.jpg" alt="Haritaki plant" loading="lazy">
+        <h3 class="plant-name">Haritaki</h3>
+        <div class="plant-info-popup">
+          <h3>Haritaki</h3>
+          <p><em>Terminalia chebula</em></p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shatavari -->
+    <div class="plant-card slide" style="--i:5;" data-plant="shatavari">
+      <div class="card-inner">
+        <img src="images/shatavari.jpg" alt="Shatavari plant" loading="lazy">
+        <h3 class="plant-name">Shatavari</h3>
+        <div class="plant-info-popup">
+          <h3>Shatavari</h3>
+          <p><em>Asparagus racemosus</em></p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guduchi -->
+    <div class="plant-card slide" style="--i:6;" data-plant="guduchi">
+      <div class="card-inner">
+        <img src="images/guduchi.jpg" alt="Guduchi plant" loading="lazy">
+        <h3 class="plant-name">Guduchi</h3>
+        <div class="plant-info-popup">
+          <h3>Guduchi (Giloy)</h3>
+          <p><em>Tinospora cordifolia</em></p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brahmi -->
+    <div class="plant-card slide" style="--i:7;" data-plant="brahmi">
+      <div class="card-inner">
+        <img src="images/brahmi.jpg" alt="Brahmi plant" loading="lazy">
+        <h3 class="plant-name">Brahmi</h3>
+        <div class="plant-info-popup">
+          <h3>Brahmi</h3>
+          <p><em>Bacopa monnieri</em></p>
+          <button class="details-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Plant Details Modal -->
+  <div class="plant-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="modal-body">
+        <img id="modal-image" src="" alt="">
+        <div class="modal-text">
+          <h2 id="modal-title"></h2>
+          <p class="latin-name" id="modal-latin"></p>
+          <div class="benefits-section">
+            <h3><i class="fas fa-leaf"></i> Benefits</h3>
+            <ul id="modal-benefits"></ul>
+          </div>
+          <div class="usage-section">
+            <h3><i class="fas fa-mortar-pestle"></i> Usage</h3>
+            <ul id="modal-usage"></ul>
+          </div>
+          <div class="precautions-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> Precautions</h3>
+            <ul id="modal-precautions"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Virtual Herbal Garden | Made by Atharva Deshmukh</p>
+  </footer>
+  <audio id="rainSound" src="sounds/rain.mp3" preload="auto" loop></audio>
+  <script>
+    // Play background rain sound
+    const rainSound = document.getElementById('rainSound');
+      rainSound.volume = 0.5; // Lower volume for subtlety
+      rainSound.play();
+    document.addEventListener('DOMContentLoaded', () => {
+      const gallery = document.querySelector('.plant-gallery');
+      const cards = document.querySelectorAll('.plant-card');
+      const hoverSound = document.getElementById('hoverSound');
+      const modal = document.querySelector('.plant-modal');
+      const closeModal = document.querySelector('.close-modal');
+      const soundIcon = document.getElementById('soundIcon');
+      const soundText = document.querySelector('.sound-control span');
+      let soundEnabled = true;
+
+      // Complete plant data
+      const plantData = {
+        tulsi: {
+          title: "Tulsi (Holy Basil)",
+          latin: "Ocimum sanctum",
+          image: "images/tulsi.jpg",
+          benefits: [
+            "Boosts immunity and fights infections",
+            "Reduces stress and anxiety",
+            "Supports respiratory health",
+            "Rich in antioxidants"
+          ],
+          usage: [
+            "As tea (3-5 fresh leaves steeped in hot water)",
+            "Fresh leaves chewed daily",
+            "Essential oil for aromatherapy"
+          ],
+          precautions: [
+            "May lower blood sugar levels",
+            "Avoid in large quantities during pregnancy",
+            "May interact with blood-thinning medications"
+          ]
+        },
+        ashwagandha: {
+          title: "Ashwagandha",
+          latin: "Withania somnifera",
+          image: "images/ashwagandha.jpg",
+          benefits: [
+            "Reduces cortisol levels (stress hormone)",
+            "Increases muscle strength and endurance",
+            "Improves sleep quality",
+            "Enhances brain function"
+          ],
+          usage: [
+            "Powder mixed with warm milk (1 tsp before bed)",
+            "Capsules (300-500mg daily)",
+            "Oil for massage to relieve joint pain"
+          ],
+          precautions: [
+            "Avoid during pregnancy",
+            "May cause drowsiness when combined with sedatives",
+            "Start with small doses if new to herb"
+          ]
+        },
+        neem: {
+          title: "Neem",
+          latin: "Azadirachta indica",
+          image: "images/neem.jpg",
+          benefits: [
+            "Powerful blood purifier",
+            "Treats skin disorders (eczema, psoriasis)",
+            "Natural pesticide and antifungal",
+            "Supports oral health"
+          ],
+          usage: [
+            "Leaf paste applied to skin",
+            "Twigs used as toothbrushes",
+            "Oil diluted for skin application",
+            "Leaf tea for internal cleansing"
+          ],
+          precautions: [
+            "Very bitter taste",
+            "Avoid during pregnancy",
+            "May lower blood sugar significantly",
+            "Limit internal use to 2-4 weeks at a time"
+          ]
+        },
+        amalaki: {
+          title: "Amalaki (Indian Gooseberry)",
+          latin: "Phyllanthus emblica",
+          image: "images/amalaki.jpg",
+          benefits: [
+            "Richest natural source of Vitamin C",
+            "Powerful anti-aging properties",
+            "Supports liver function",
+            "Promotes hair growth"
+          ],
+          usage: [
+            "Fresh fruit eaten raw (very sour)",
+            "Powder mixed with honey (1 tsp daily)",
+            "Key ingredient in Chyawanprash",
+            "Hair oil for scalp massage"
+          ],
+          precautions: [
+            "May cause acidity in some individuals",
+            "Reduce dose if loose stools occur",
+            "Natural diuretic - stay hydrated"
+          ]
+        },
+        haritaki: {
+          title: "Haritaki",
+          latin: "Terminalia chebula",
+          image: "images/haritaki.jpg",
+          benefits: [
+            "Natural colon cleanser",
+            "Improves digestion and absorption",
+            "Enhances mental clarity",
+            "Balances all three doshas (Vata, Pitta, Kapha)"
+          ],
+          usage: [
+            "Powder taken with ghee (for Vata)",
+            "Powder taken with honey (for Kapha)",
+            "Powder taken with sugar (for Pitta)",
+            "Triphala combination (with Amalaki and Bibhitaki)"
+          ],
+          precautions: [
+            "May cause dehydration if taken without enough water",
+            "Reduce dose if experiencing diarrhea",
+            "Avoid during pregnancy"
+          ]
+        },
+        shatavari: {
+          title: "Shatavari",
+          latin: "Asparagus racemosus",
+          image: "images/shatavari.jpg",
+          benefits: [
+            "Premier female reproductive tonic",
+            "Supports lactation in nursing mothers",
+            "Balances female hormones",
+            "Soothes digestive inflammation"
+          ],
+          usage: [
+            "Powder mixed with warm milk (1 tsp twice daily)",
+            "As ghee preparation",
+            "Capsules (500mg daily)",
+            "In herbal jams for regular use"
+          ],
+          precautions: [
+            "May increase estrogen levels",
+            "Consult doctor if on hormone therapy",
+            "Avoid in estrogen-sensitive conditions"
+          ]
+        },
+        guduchi: {
+          title: "Guduchi (Giloy)",
+          latin: "Tinospora cordifolia",
+          image: "images/guduchi.jpg",
+          benefits: [
+            "Powerful immune modulator",
+            "Detoxifies liver and blood",
+            "Reduces fever naturally",
+            "Anti-inflammatory for joints"
+          ],
+          usage: [
+            "Stem juice (5-10ml daily)",
+            "Powder (1-3g with honey)",
+            "As decoction for fever",
+            "Combined with neem for skin conditions"
+          ],
+          precautions: [
+            "May cause mild diarrhea in high doses",
+            "Can lower blood sugar levels",
+            "Avoid during acute cold/flu with congestion"
+          ]
+        },
+        brahmi: {
+          title: "Brahmi",
+          latin: "Bacopa monnieri",
+          image: "images/brahmi.jpg",
+          benefits: [
+            "Enhances memory and cognitive function",
+            "Reduces anxiety and stress",
+            "Promotes nerve regeneration",
+            "Anti-epileptic properties"
+          ],
+          usage: [
+            "Fresh juice (5-10ml daily)",
+            "Powder with ghee (for brain benefits)",
+            "Oil for head massage",
+            "Capsules (300mg standardized extract)"
+          ],
+          precautions: [
+            "May cause nausea in some individuals",
+            "Start with small doses",
+            "Avoid with thyroid medications without consultation"
+          ]
+        }
+      };
+
+      // Set hover sound volume
+      hoverSound.volume = 0.3;
+
+      // Sound toggle functionality
+      soundIcon.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        if (soundEnabled) {
+          soundIcon.className = 'fas fa-volume-up';
+          soundText.textContent = 'Sound On';
+          hoverSound.volume = 0.3;
+        } else {
+          soundIcon.className = 'fas fa-volume-mute';
+          soundText.textContent = 'Sound Off';
+          hoverSound.volume = 0;
+        }
+      });
+
+      // Card hover effects
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          gallery.classList.add('hover-active');
+          card.classList.add('hovered');
+          if (soundEnabled) {
+            try {
+              hoverSound.currentTime = 0;
+              hoverSound.play().catch(e => console.log("Audio play failed:", e));
+            } catch (error) {
+              console.error("Audio error:", error);
+            }
+          }
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gallery.classList.remove('hover-active');
+          card.classList.remove('hovered');
+        });
+
+        // Click handler for modal
+        card.addEventListener('click', (e) => {
+          const plantId = card.dataset.plant;
+          const data = plantData[plantId];
+          
+          document.getElementById('modal-title').textContent = data.title;
+          document.getElementById('modal-latin').textContent = data.latin;
+          document.getElementById('modal-image').src = data.image;
+          document.getElementById('modal-image').alt = data.title;
+          
+          // Populate benefits
+          const benefitsList = document.getElementById('modal-benefits');
+          benefitsList.innerHTML = '';
+          data.benefits.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            benefitsList.appendChild(li);
+          });
+          
+          // Populate usage
+          const usageList = document.getElementById('modal-usage');
+          usageList.innerHTML = '';
+          data.usage.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            usageList.appendChild(li);
+          });
+          
+          // Populate precautions
+          const precautionsList = document.getElementById('modal-precautions');
+          precautionsList.innerHTML = '';
+          data.precautions.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            precautionsList.appendChild(li);
+          });
+          
+          modal.style.display = "block";
+          document.body.style.overflow = "hidden";
+        });
+      });
+
+      // Close modal
+      closeModal.addEventListener('click', () => {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+      });
+
+      // Close when clicking outside modal
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = "none";
+          document.body.style.overflow = "auto";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
