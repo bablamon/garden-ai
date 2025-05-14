@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Virtual Herbal Garden - Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="plants.html">Plants</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Virtual Herbal Garden</h1>
+    <p>Explore the power of nature through Ayurveda, Unani, Siddha & Homeopathy.</p>
+    <a href="plants.html" class="cta">Explore Plants</a>
+  </section>
+
+  <section class="credits">
+    <h2>Made By</h2>
+    <div class="name-scroller">
+      <span>Atharva Deshmukh</span>
+      <span>Prathmesh Naik</span>
+      <span>Maahit Bhawsar</span>
+      <span>Pranav Shirode</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Virtual Herbal Garden | Made by Atharva Deshmukh and Team</p>
+  </footer>
+
+  <!-- Chat Widget -->
+  <div class="chat-widget">
+    <button id="chat-toggle">Chat</button>
+    <div id="chat-window" style="display: none;">
+      <div class="chat-header">
+        <span>Herbal Assistant</span>
+        <button onclick="toggleChat()">×</button>
+      </div>
+      <div id="chat-messages"></div>
+      <form id="chat-form">
+        <input type="text" id="chat-input" placeholder="Ask about herbs..." required />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <audio id="hoverSound" src="sounds/hover.mp3" preload="auto"></audio>
+  <audio id="rainSound" src="sounds/rain.mp3" preload="auto" loop></audio>
+
+  <script src="script.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM fully loaded');
+
+      // Play background rain sound with user interaction fallback
+      const rainSound = document.getElementById('rainSound');
+      rainSound.volume = 0.3;
+      const playRainSound = () => {
+        rainSound.play().catch(error => {
+          console.log('Autoplay prevented:', error);
+          document.addEventListener('click', () => {
+            rainSound.play();
+          }, { once: true });
+        });
+      };
+      playRainSound();
+
+      // Hover sound for interactive elements
+      const hoverSound = document.getElementById('hoverSound');
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          if (hoverSound) {
+            hoverSound.currentTime = 0;
+            hoverSound.play();
+          }
+        });
+      });
+
+      // Debug: Ensure chat toggle button is found
+      const chatToggle = document.getElementById('chat-toggle');
+      const chatWindow = document.getElementById('chat-window');
+      if (!chatToggle) {
+        console.error('Chat toggle button not found!');
+      } else {
+        console.log('Chat toggle button found');
+        chatToggle.addEventListener('click', toggleChat);
+      }
+      if (!chatWindow) {
+        console.error('Chat window not found!');
+      } else {
+        console.log('Chat window found');
+      }
+    });
+
+    // Chat toggle function
+    function toggleChat() {
+      const chatWindow = document.getElementById('chat-window');
+      if (!chatWindow) {
+        console.error('Chat window not found in toggleChat!');
+        return;
+      }
+      console.log('Toggling chat window, current display:', chatWindow.style.display);
+      chatWindow.style.display = chatWindow.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
